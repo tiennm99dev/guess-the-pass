@@ -1,5 +1,19 @@
 # guess-the-pass
 
-__CAUTION:__ This game is still in development and may not work as expected.
+Guess-the-password CLI mini-game written in Java.
 
-Just a game play through commands
+## Quick start
+
+```bash
+./gradlew run
+```
+
+Or with Docker:
+
+```bash
+docker compose up
+```
+
+## License
+
+Apache-2.0 — see [LICENSE](LICENSE).
