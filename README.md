@@ -1,6 +1,6 @@
 # guess-the-pass
 
-Telegram bot game where players guess a secret password — written in Java using the Telegrambots library.
+Telegram bot game where players guess a secret password — written in Go using the [go-telegram/bot](https://github.com/go-telegram/bot) library.
 
 ## Quick start
 
@@ -8,7 +8,14 @@ Telegram bot game where players guess a secret password — written in Java usin
 # Set environment variable
 export BOT_TOKEN=your_telegram_bot_token
 
-./gradlew run
+go run .
+```
+
+Or build a binary:
+
+```bash
+go build -o guess-the-pass .
+./guess-the-pass
 ```
 
 Or with Docker:
@@ -29,7 +36,7 @@ User:  secret123
 Bot:   secret123
 ```
 
-> The bot currently mirrors messages (echo mode). Extend `GuessThePassBot.consume()` to add win-condition logic.
+> The bot currently mirrors messages (echo mode). Extend `Echo` in `internal/bot/handler.go` to add win-condition logic.
 
 ## Configuration
 

@@ -1,15 +1,19 @@
-FROM gradle:8-jdk21-corretto as builder
+FROM golang:1.23-alpine AS builder
 
 WORKDIR /app
+
+COPY go.mod go.sum ./
+RUN go mod download
 
 COPY . .
+RUN CGO_ENABLED=0 go build -o /app/guess-the-pass .
 
-RUN gradle clean build -x check -x test
+FROM alpine:3.20
 
-FROM amazoncorretto:21-alpine
+RUN apk add --no-cache ca-certificates
 
 WORKDIR /app
 
-COPY --from=builder /app/build/libs/ /app
+COPY --from=builder /app/guess-the-pass /app/guess-the-pass
 
-CMD ["sh", "-c", "java $JAVA_OPTS -jar $(ls -1 *jar | grep -v plain)"]
+CMD ["/app/guess-the-pass"]
